@@ -1,7 +1,7 @@
 // Countdown Timer logic
 const countdownDate = new Date("Mar 28, 2026 12:00:00").getTime();
 
-const countdownInterval = setInterval(function () {
+function updateCountdown() {
     const now = new Date().getTime();
     const distance = countdownDate - now;
 
@@ -13,14 +13,16 @@ const countdownInterval = setInterval(function () {
 
     // Default to 0 if we passed the date
     if (distance < 0) {
-        clearInterval(countdownInterval);
+        if (typeof countdownInterval !== 'undefined') clearInterval(countdownInterval);
         document.getElementById("days").innerText = "00";
         document.getElementById("hours").innerText = "00";
         document.getElementById("minutes").innerText = "00";
         document.getElementById("seconds").innerText = "00";
 
         const countdownContainer = document.getElementById("countdown");
-        countdownContainer.innerHTML = "<h2 style='font-family: \"Playfair Display\", serif; font-size: 2.5rem; color: var(--accent-color);'>¡Llegó el gran día!</h2>";
+        if (countdownContainer) {
+            countdownContainer.innerHTML = "<h2 style='font-family: \"Share Tech Mono\", monospace; font-size: 2.5rem; color: var(--accent-color); text-shadow: 0 0 10px rgba(32, 201, 151, 0.5);'>¡Llegó el gran día!</h2>";
+        }
         return;
     }
 
@@ -29,8 +31,11 @@ const countdownInterval = setInterval(function () {
     document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
     document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
     document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+}
 
-}, 1000);
+// Call once to avoid initial 0s delay
+updateCountdown();
+const countdownInterval = setInterval(updateCountdown, 1000);
 
 // Scroll Animations (Reveal elements on scroll)
 function reveal() {
@@ -57,10 +62,25 @@ const asisInput = document.getElementById('asistencia');
 const btnYes = document.querySelector('.btn-yes');
 const btnNo = document.querySelector('.btn-no');
 const formMessage = document.getElementById('form-message');
+const nombreInput = document.getElementById('nombre');
 
-const scriptURL = 'https://script.google.com/macros/library/d/13otkG7WF7ZVJt0iQydYgXNRgkpYbYeTknRfuejKak807Vx5tQYUtZWP0/2';
+// Prevenir envíos múltiples revisando el localStorage
+if (localStorage.getItem('rsvpSubmitted') === 'true') {
+    if (nombreInput) nombreInput.disabled = true;
+    if (btnYes) btnYes.disabled = true;
+    if (btnNo) btnNo.disabled = true;
+    if (formMessage) {
+        formMessage.textContent = 'Ya respondiste a la invitación. ¡Gracias!';
+        formMessage.className = 'form-message success';
+    }
+}
+
+const scriptURL = 'https://script.google.com/macros/s/AKfycbywoMV4VeCdmmQqoAiSt_RiHndLOP-db2XW2CqyXIfH6sv4KVp8x8mhqeUsvoGg4L81/exec';
 
 function submitForm(asistenciaValue) {
+    if (localStorage.getItem('rsvpSubmitted') === 'true') {
+        return; // Evita el envío si ya se completó
+    }
     if (!form) return;
 
     // Validar nombre
@@ -97,6 +117,10 @@ function submitForm(asistenciaValue) {
             btnYes.innerHTML = '<i class="fas fa-check"></i> Enviado';
             btnNo.innerHTML = '<i class="fas fa-check"></i> Enviado';
             form.reset();
+
+            // Guardar en local storage para que no lo envíe de nuevo
+            localStorage.setItem('rsvpSubmitted', 'true');
+            if (nombreInput) nombreInput.disabled = true;
         })
         .catch(error => {
             console.error('Error!', error.message);
@@ -107,4 +131,38 @@ function submitForm(asistenciaValue) {
             btnYes.innerHTML = '<i class="fas fa-check"></i> ¡Asisto!';
             btnNo.innerHTML = '<i class="fas fa-times"></i> No podré ir';
         });
+}
+
+// Typing effect for title
+const titleElement = document.querySelector('.main-title');
+if (titleElement) {
+    const textToType = "¡Me recibo\nde Médico!";
+    titleElement.innerHTML = '<span class="typed-text"></span><span class="cursor" style="animation: blink 1s step-end infinite; color: var(--primary-color);">_</span>';
+    const textSpan = titleElement.querySelector('.typed-text');
+
+    let charIndex = 0;
+    function typeWriter() {
+        if (charIndex < textToType.length) {
+            if (textToType.charAt(charIndex) === '\n') {
+                textSpan.innerHTML += '<br>';
+            } else {
+                textSpan.innerHTML += textToType.charAt(charIndex);
+            }
+            charIndex++;
+            setTimeout(typeWriter, Math.floor(Math.random() * 80) + 50); // random delay
+        }
+    }
+
+    // Start typing slightly after page load
+    setTimeout(typeWriter, 600);
+}
+
+// Function to toggle location dropdown
+function toggleLocation(element) {
+    // Optional: close other open dropdowns
+    document.querySelectorAll('.clickable-schedule.active-dropdown').forEach(item => {
+        if (item !== element) item.classList.remove('active-dropdown');
+    });
+
+    element.classList.toggle('active-dropdown');
 }

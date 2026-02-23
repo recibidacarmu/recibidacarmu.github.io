@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Me recibo! - Invitación</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -43,10 +45,11 @@
                 </div>
             </div>
 
-            <a href="#cronograma" class="scroll-down">
-                <i class="fas fa-chevron-down"></i>
-            </a>
         </div>
+
+        <a href="#cronograma" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </header>
 
     <section id="cronograma" class="timeline-section">
@@ -57,9 +60,18 @@
                 <div class="timeline-icon">
                     <i class="fas fa-camera"></i>
                 </div>
-                <div class="timeline-content">
-                    <h3>12:00 PM - La Recibida</h3>
+                <div class="timeline-content clickable-schedule" onclick="toggleLocation(this)">
+                    <div class="content-header">
+                        <h3>11:30 - La Recibida</h3>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
                     <p>¡El momento oficial! Nos sacamos fotos sin huevos ni ensuciar. Todo muy prolijo.</p>
+                    <div class="location-dropdown">
+                        <a href="https://maps.app.goo.gl/GTmS9jE81myUoPRE6" target="_blank" class="map-link"
+                            onclick="event.stopPropagation()">
+                            <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -67,9 +79,19 @@
                 <div class="timeline-icon">
                     <i class="fas fa-car-side"></i>
                 </div>
-                <div class="timeline-content">
-                    <h3>1ra Caravana</h3>
-                    <p><strong>Parque Helios Eseverri</strong><br>Acá empezamos con todo: huevos, espuma y festejo.</p>
+                <div class="timeline-content clickable-schedule" onclick="toggleLocation(this)">
+                    <div class="content-header">
+                        <h3>A lo bueno...</h3>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <p><strong>Parque Helios Eseverri</strong><br>Acá si son libres para todo: huevos, espuma y festejo.
+                    </p>
+                    <div class="location-dropdown">
+                        <a href="https://maps.app.goo.gl/pbomxdNmxjHVobUw8" target="_blank" class="map-link"
+                            onclick="event.stopPropagation()">
+                            <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -77,10 +99,19 @@
                 <div class="timeline-icon">
                     <i class="fas fa-water"></i>
                 </div>
-                <div class="timeline-content">
-                    <h3>2da Caravana</h3>
-                    <p><strong>Parque Mitre</strong><br>Nos vemos en la estatua de San Martín, en el muelle. ¡Me tiro al
-                        arroyo!</p>
+                <div class="timeline-content clickable-schedule" onclick="toggleLocation(this)">
+                    <div class="content-header">
+                        <h3>Caravana</h3>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <p><strong>Tirada al arroyo</strong><br>Para ir terminando con la primer ceremonia: Al muelle.
+                    </p>
+                    <div class="location-dropdown">
+                        <a href="https://maps.app.goo.gl/F7ZiqDXVTxhGc4EJA" target="_blank" class="map-link"
+                            onclick="event.stopPropagation()">
+                            <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -88,9 +119,18 @@
                 <div class="timeline-icon">
                     <i class="fas fa-glass-cheers"></i>
                 </div>
-                <div class="timeline-content">
-                    <h3>Cena Familiar</h3>
-                    <p><strong>Salón (Ubicación a confirmar)</strong><br>Cerramos el día cenando en familia.</p>
+                <div class="timeline-content clickable-schedule" onclick="toggleLocation(this)">
+                    <div class="content-header">
+                        <h3>21:00 - Cena Familiar</h3>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <p><strong>Salón (Ubicación a confirmar)</strong><br>Cerramos el día cenando en familia y amigos.
+                    </p>
+                    <div class="location-dropdown">
+                        <span class="map-link disabled" onclick="event.stopPropagation()">
+                            <i class="fas fa-clock"></i> Ubicación a confirmar
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -110,10 +150,10 @@
 
             <div class="form-buttons">
                 <button type="button" class="rsvp-btn btn-yes" onclick="submitForm('Si')">
-                    <i class="fas fa-check"></i> ¡Asisto!
+                    <i class="fas fa-check"></i> Asisto, obvio 🍾
                 </button>
                 <button type="button" class="rsvp-btn btn-no" onclick="submitForm('No')">
-                    <i class="fas fa-times"></i> No podré ir
+                    <i class="fas fa-times"></i> No podré ir 😔
                 </button>
             </div>
 
