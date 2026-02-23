@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Me recibo! - Invitación</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h2 class="pre-title">Llega el día</h2>
+            <h1 class="main-title">¡Me recibo<br>de Médico!</h1>
+            <p class="date">28 de Marzo</p>
+
+            <div class="countdown" id="countdown">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <p>Días</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <p>Horas</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <p>Minutos</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <p>Segundos</p>
+                </div>
+            </div>
+
+            <a href="#cronograma" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </header>
+
+    <section id="cronograma" class="timeline-section">
+        <h2 class="section-title">Cronograma</h2>
+        <div class="timeline">
+
+            <div class="timeline-item reveal">
+                <div class="timeline-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="timeline-content">
+                    <h3>12:00 PM - La Recibida</h3>
+                    <p>¡El momento oficial! Nos sacamos fotos sin huevos ni ensuciar. Todo muy prolijo.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="timeline-content">
+                    <h3>1ra Caravana</h3>
+                    <p><strong>Parque Helios Eseverri</strong><br>Acá empezamos con todo: huevos, espuma y festejo.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="timeline-content">
+                    <h3>2da Caravana</h3>
+                    <p><strong>Parque Mitre</strong><br>Nos vemos en la estatua de San Martín, en el muelle. ¡Me tiro al
+                        arroyo!</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <div class="timeline-content">
+                    <h3>Cena Familiar</h3>
+                    <p><strong>Salón (Ubicación a confirmar)</strong><br>Cerramos el día cenando en familia.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="rsvp" class="rsvp-section reveal">
+        <h2 class="section-title">Confirmar Asistencia</h2>
+        <p>Por favor, confirmame tu asistencia para calcular todo mejor y compartir este momento tan especial.</p>
+
+        <form id="rsvp-form" class="rsvp-form">
+            <div class="form-group">
+                <input type="text" id="nombre" name="Nombre" placeholder="Nombre y Apellido" required>
+            </div>
+            <div class="form-group">
+                <select id="asistencia" name="Asistencia" required>
+                    <option value="" disabled selected>¿Asistís a la Cena?</option>
+                    <option value="Si">Sí, obvio</option>
+                    <option value="No">No, esta vez paso</option>
+                    <option value="Solo Caravana">Solo voy a la Caravana</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="restricciones" name="Restricciones"
+                    placeholder="¿Alguna restricción alimentaria? (opcional)">
+            </div>
+            <button type="submit" class="rsvp-btn" id="submit-btn">
+                <i class="fas fa-paper-plane"></i> Enviar Confirmación
+            </button>
+            <p id="form-message" class="form-message"></p>
+        </form>
+    </section>
+
+    <footer>
+        <p>¡Te espero para festejar!</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
