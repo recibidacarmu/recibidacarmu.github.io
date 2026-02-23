@@ -53,41 +53,58 @@ reveal();
 
 // RSVP Form Logic
 const form = document.getElementById('rsvp-form');
-const submitBtn = document.getElementById('submit-btn');
+const asisInput = document.getElementById('asistencia');
+const btnYes = document.querySelector('.btn-yes');
+const btnNo = document.querySelector('.btn-no');
 const formMessage = document.getElementById('form-message');
 
-// IMPORTANTE: REEMPLAZAR ESTA URL CON LA QUE TE DÉ GOOGLE APPS SCRIPT
-const scriptURL = 'https://script.google.com/macros/s/AKfycbywoMV4VeCdmmQqoAiSt_RiHndLOP-db2XW2CqyXIfH6sv4KVp8x8mhqeUsvoGg4L81/exec';
+const scriptURL = 'https://script.google.com/macros/library/d/13otkG7WF7ZVJt0iQydYgXNRgkpYbYeTknRfuejKak807Vx5tQYUtZWP0/2';
 
-if (form) {
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+function submitForm(asistenciaValue) {
+    if (!form) return;
 
-        // Evitamos enviar si el link no fue configurado
-        if (scriptURL === 'AQUI_VA_TU_LINK_DE_GOOGLE_APPS_SCRIPT') {
-            formMessage.textContent = '¡Falta configurar el link de Google Sheets! (mirá el código)';
+    // Validar nombre
+    const nombreInput = document.getElementById('nombre');
+    if (!nombreInput.value.trim()) {
+        formMessage.textContent = 'Por favor, escribí tu nombre primero.';
+        formMessage.className = 'form-message error';
+        nombreInput.focus();
+        return;
+    }
+
+    // Set hidden value and update UI
+    asisInput.value = asistenciaValue;
+    btnYes.disabled = true;
+    btnNo.disabled = true;
+
+    if (asistenciaValue === 'Si') {
+        btnYes.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    } else {
+        btnNo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    }
+
+    formMessage.textContent = '';
+    formMessage.className = 'form-message';
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+        .then(response => {
+            if (asistenciaValue === 'Si') {
+                formMessage.textContent = '¡Qué bueno! Nos vemos pronto para festejar.';
+            } else {
+                formMessage.textContent = '¡Qué lástima! Nos veremos la próxima.';
+            }
+            formMessage.className = 'form-message success';
+            btnYes.innerHTML = '<i class="fas fa-check"></i> Enviado';
+            btnNo.innerHTML = '<i class="fas fa-check"></i> Enviado';
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            formMessage.textContent = 'Hubo un error al enviar. Por favor intentá de nuevo.';
             formMessage.className = 'form-message error';
-            return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-        formMessage.textContent = '';
-        formMessage.className = 'form-message';
-
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(response => {
-                formMessage.textContent = '¡Gracias por confirmar! Nos vemos pronto.';
-                formMessage.className = 'form-message success';
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Enviado';
-                form.reset();
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                formMessage.textContent = 'Hubo un error al enviar. Por favor intentá de nuevo.';
-                formMessage.className = 'form-message error';
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Confirmación';
-            });
-    });
+            btnYes.disabled = false;
+            btnNo.disabled = false;
+            btnYes.innerHTML = '<i class="fas fa-check"></i> ¡Asisto!';
+            btnNo.innerHTML = '<i class="fas fa-times"></i> No podré ir';
+        });
 }

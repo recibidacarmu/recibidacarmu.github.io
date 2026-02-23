@@ -105,21 +105,18 @@
             <div class="form-group">
                 <input type="text" id="nombre" name="Nombre" placeholder="Nombre y Apellido" required>
             </div>
-            <div class="form-group">
-                <select id="asistencia" name="Asistencia" required>
-                    <option value="" disabled selected>¿Asistís a la Cena?</option>
-                    <option value="Si">Sí, obvio</option>
-                    <option value="No">No, esta vez paso</option>
-                    <option value="Solo Caravana">Solo voy a la Caravana</option>
-                </select>
+
+            <input type="hidden" id="asistencia" name="Asistencia" value="">
+
+            <div class="form-buttons">
+                <button type="button" class="rsvp-btn btn-yes" onclick="submitForm('Si')">
+                    <i class="fas fa-check"></i> ¡Asisto!
+                </button>
+                <button type="button" class="rsvp-btn btn-no" onclick="submitForm('No')">
+                    <i class="fas fa-times"></i> No podré ir
+                </button>
             </div>
-            <div class="form-group">
-                <input type="text" id="restricciones" name="Restricciones"
-                    placeholder="¿Alguna restricción alimentaria? (opcional)">
-            </div>
-            <button type="submit" class="rsvp-btn" id="submit-btn">
-                <i class="fas fa-paper-plane"></i> Enviar Confirmación
-            </button>
+
             <p id="form-message" class="form-message"></p>
         </form>
     </section>
