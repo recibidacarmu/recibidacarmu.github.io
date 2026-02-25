@@ -133,6 +133,8 @@ function submitForm(asistenciaValue) {
         .then(response => {
             if (asistenciaValue === 'Si') {
                 formMessage.textContent = 'Cool 😎. Nos vemos pronto para festejar.';
+            } else if (checkboxBelenes && checkboxBelenes.checked) {
+                formMessage.textContent = 'Nos vemos mas tarde entonces 😉';
             } else {
                 formMessage.textContent = 'Qué lástima 😔.';
             }
