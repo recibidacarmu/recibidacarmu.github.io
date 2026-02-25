@@ -97,6 +97,13 @@ function submitForm(asistenciaValue) {
     if (!form) return;
 
     const nombreInput = document.getElementById('nombre');
+
+    // Easter Egg: 'carmu'
+    if (nombreInput.value.trim().toLowerCase() === 'carmu') {
+        document.getElementById('easter-egg-modal').style.display = 'flex';
+        return;
+    }
+
     if (!nombreInput.value.trim()) {
         formMessage.textContent = 'Por favor, escribí tu nombre primero.';
         formMessage.className = 'form-message error';
@@ -199,4 +206,63 @@ function copyText(elementId) {
     }).catch(err => {
         console.error('Error al copiar: ', err);
     });
+}
+
+// --- Music Player Logic ---
+const musicToggle = document.getElementById('music-toggle');
+const bgMusic = document.getElementById('bg-music');
+let isMusicPlaying = false;
+
+if (musicToggle && bgMusic) {
+    // Volume
+    bgMusic.volume = 0.5;
+
+    // Try to autoplay
+    const playPromise = bgMusic.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Autoplay started!
+            isMusicPlaying = true;
+            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            musicToggle.title = "Pausar música";
+            musicToggle.style.boxShadow = "0 0 20px rgba(0, 229, 255, 0.6)";
+        }).catch(error => {
+            // Autoplay was prevented.
+            console.log("Autoplay prevented by browser. User interaction is needed.");
+            isMusicPlaying = false;
+            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        });
+    }
+
+    musicToggle.addEventListener('click', () => {
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            musicToggle.title = "Reproducir música";
+            musicToggle.style.boxShadow = "0 0 10px rgba(0, 229, 255, 0.2)";
+        } else {
+            bgMusic.play().catch(e => {
+                console.log("Audio play failed:", e);
+                //alert("No se pudo reproducir el audio. Asegurate de tener el archivo correcto.");
+            });
+            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            musicToggle.title = "Pausar música";
+            musicToggle.style.boxShadow = "0 0 20px rgba(0, 229, 255, 0.6)";
+        }
+        isMusicPlaying = !isMusicPlaying;
+    });
+}
+
+// --- Easter Egg ---
+function closeEasterEgg() {
+    const modal = document.getElementById('easter-egg-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        const nombreInput = document.getElementById('nombre');
+        if (nombreInput) {
+            nombreInput.value = '';
+            nombreInput.focus();
+        }
+    }
 }

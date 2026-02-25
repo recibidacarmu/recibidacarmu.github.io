@@ -192,9 +192,30 @@
         </form>
     </section>
 
+    <!-- Easter Egg Modal -->
+    <div id="easter-egg-modal" class="easter-egg-modal god-mode" style="display: none;" onclick="closeEasterEgg()">
+        <div class="lightning-flash flash-1"></div>
+        <div class="lightning-flash flash-2"></div>
+        <div class="lightning-flash flash-3"></div>
+        <div class="easter-egg-content god-content">
+            <h2 class="easter-egg-title"
+                style="font-family: 'Share Tech Mono', monospace; color: var(--primary-color); text-shadow: 0 0 20px #fff, 0 0 40px var(--primary-color);">
+                You found me</h2>
+            <img src="src/carmu.png" alt="Foto de Carmu" class="easter-egg-img god-img">
+        </div>
+    </div>
+
     <footer>
         <p>¡Te espero para festejar!</p>
     </footer>
+
+    <audio id="bg-music" loop>
+        <source src="src/inolvidable.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" class="music-btn" title="Reproducir música">
+        <i class="fas fa-volume-mute"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
