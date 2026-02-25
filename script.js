@@ -114,6 +114,12 @@ function submitForm(asistenciaValue) {
     btnYes.disabled = true;
     btnNo.disabled = true;
 
+    const checkboxBelenes = document.getElementById('checkbox-belenes');
+    const inputBelenes = document.getElementById('input-belenes');
+    if (checkboxBelenes && inputBelenes) {
+        inputBelenes.value = checkboxBelenes.checked ? 'Si' : 'No';
+    }
+
     if (asistenciaValue === 'Si') {
         btnYes.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
     } else {
@@ -189,6 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const paymentSection = document.getElementById('payment-section');
         if (paymentSection) {
             paymentSection.style.display = 'block';
+        }
+
+        const belenesPriceText = document.getElementById('belenes-price-text');
+        if (belenesPriceText) {
+            belenesPriceText.innerHTML = '(Entrada: $10.000 extra)';
         }
     }
 });
