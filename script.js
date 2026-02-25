@@ -193,6 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const checkboxBelenes = document.getElementById('checkbox-belenes');
     const belenesPaymentSection = document.getElementById('belenes-payment-section');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    const nombreInput = document.getElementById('nombre');
 
     if (checkboxBelenes && belenesPaymentSection) {
         checkboxBelenes.addEventListener('change', (e) => {
@@ -201,6 +203,22 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 belenesPaymentSection.classList.remove('active-dropdown');
             }
+        });
+    }
+
+    if (whatsappBtn && nombreInput) {
+        whatsappBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nombre = nombreInput.value.trim();
+            let mensaje = "Hola! Acá te adjunto el comprobante de la entrada para la fiesta en Los Belenes.";
+            if (nombre) {
+                mensaje += ` Soy ${nombre}, invitado de Agustin Carmu.`;
+            } else {
+                mensaje += " Soy [Escribí tu nombre y apellido acá], invitado de Agustin Carmu.";
+            }
+
+            const whatsappUrl = `https://wa.me/5492284675934?text=${encodeURIComponent(mensaje)}`;
+            window.open(whatsappUrl, '_blank');
         });
     }
 
