@@ -73,8 +73,8 @@ reveal();
 
 const form = document.getElementById('rsvp-form');
 const asisInput = document.getElementById('asistencia');
-const btnYes = document.querySelector('.btn-yes');
-const btnNo = document.querySelector('.btn-no');
+const btnYes = document.querySelector('button.btn-yes');
+const btnNo = document.querySelector('button.btn-no');
 const formMessage = document.getElementById('form-message');
 const nombreInput = document.getElementById('nombre');
 
@@ -143,6 +143,8 @@ function submitForm(asistenciaValue) {
 
             localStorage.setItem('rsvpSubmitted', 'true');
             if (nombreInput) nombreInput.disabled = true;
+            if (btnYes) btnYes.disabled = true;
+            if (btnNo) btnNo.disabled = true;
         })
         .catch(error => {
             console.error('Error!', error.message);
@@ -152,11 +154,11 @@ function submitForm(asistenciaValue) {
             btnNo.disabled = false;
             btnYes.innerHTML = '<i class="fas fa-check"></i> ¡Asisto!';
             if (checkboxBelenes && checkboxBelenes.checked) {
-                btnNo.innerHTML = 'Voy solo a la fiesta (2am) 🕺🏻';
+                btnNo.innerHTML = '<i class="fas fa-glass-cheers"></i> Voy solo a la fiesta (2am) 🕺🏻';
                 btnNo.classList.remove('btn-no');
                 btnNo.classList.add('btn-party');
             } else {
-                btnNo.innerHTML = 'No podré ir 😔';
+                btnNo.innerHTML = '<i class="fas fa-times"></i> No podré ir 😔';
                 btnNo.classList.remove('btn-party');
                 btnNo.classList.add('btn-no');
             }
@@ -209,14 +211,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target.checked) {
                 if (belenesDropdown) belenesDropdown.style.display = 'block';
                 if (btnNo) {
-                    btnNo.innerHTML = 'Voy solo a la fiesta (2am) 🕺🏻';
+                    btnNo.innerHTML = '<i class="fas fa-glass-cheers"></i> Voy solo a la fiesta (2am) 🕺🏻';
                     btnNo.classList.remove('btn-no');
                     btnNo.classList.add('btn-party');
                 }
             } else {
                 if (belenesDropdown) belenesDropdown.style.display = 'none';
                 if (btnNo) {
-                    btnNo.innerHTML = 'No podré ir 😔';
+                    btnNo.innerHTML = '<i class="fas fa-times"></i> No podré ir 😔';
                     btnNo.classList.remove('btn-party');
                     btnNo.classList.add('btn-no');
                 }

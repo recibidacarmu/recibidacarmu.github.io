@@ -101,8 +101,9 @@ h3,
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 229, 255, 0.3);
     border-radius: 8px;
-    padding: 15px 20px;
-    min-width: 95px;
+    padding: 15px 10px;
+    width: 115px;
+    /* Ensures all timers are the same size */
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 229, 255, 0.05) inset;
 }
@@ -475,9 +476,12 @@ h3,
 }
 
 .rsvp-form .rsvp-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
     box-shadow: none !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .form-message {
@@ -585,8 +589,10 @@ footer {
     }
 
     .time-box {
-        min-width: 85px;
-        padding: 12px;
+        width: 100px;
+        flex: 1 1 90px;
+        max-width: 140px;
+        padding: 12px 5px;
     }
 
     .timeline::before {
@@ -629,7 +635,9 @@ footer {
     }
 
     .time-box {
-        min-width: 75px;
+        width: 85px;
+        flex: 1 1 75px;
+        max-width: 120px;
     }
 
     .time-box span {
