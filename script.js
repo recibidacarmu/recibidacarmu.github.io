@@ -227,11 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (paymentSection) {
             paymentSection.style.display = 'block';
         }
-
-        const belenesPriceText = document.getElementById('belenes-price-text');
-        if (belenesPriceText) {
-            belenesPriceText.innerHTML = '(Entrada: $10.000 extra)';
-        }
     }
 });
 
