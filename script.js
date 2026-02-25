@@ -98,7 +98,6 @@ function submitForm(asistenciaValue) {
 
     const nombreInput = document.getElementById('nombre');
 
-    // Easter Egg: 'carmu'
     if (nombreInput.value.trim().toLowerCase() === 'carmu') {
         document.getElementById('easter-egg-modal').style.display = 'flex';
         return;
@@ -208,27 +207,22 @@ function copyText(elementId) {
     });
 }
 
-// --- Music Player Logic ---
 const musicToggle = document.getElementById('music-toggle');
 const bgMusic = document.getElementById('bg-music');
 let isMusicPlaying = false;
 
 if (musicToggle && bgMusic) {
-    // Volume
     bgMusic.volume = 0.5;
 
-    // Try to autoplay
     const playPromise = bgMusic.play();
 
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-            // Autoplay started!
             isMusicPlaying = true;
             musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
             musicToggle.title = "Pausar música";
             musicToggle.style.boxShadow = "0 0 20px rgba(0, 229, 255, 0.6)";
         }).catch(error => {
-            // Autoplay was prevented.
             console.log("Autoplay prevented by browser. User interaction is needed.");
             isMusicPlaying = false;
             musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
@@ -244,7 +238,6 @@ if (musicToggle && bgMusic) {
         } else {
             bgMusic.play().catch(e => {
                 console.log("Audio play failed:", e);
-                //alert("No se pudo reproducir el audio. Asegurate de tener el archivo correcto.");
             });
             musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
             musicToggle.title = "Pausar música";
@@ -254,7 +247,6 @@ if (musicToggle && bgMusic) {
     });
 }
 
-// --- Easter Egg ---
 function closeEasterEgg() {
     const modal = document.getElementById('easter-egg-modal');
     if (modal) {
