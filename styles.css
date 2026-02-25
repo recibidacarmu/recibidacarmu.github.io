@@ -679,6 +679,24 @@ footer {
     border: 1px solid rgba(0, 158, 227, 0.2);
 }
 
+.belenes-payment-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease, opacity 0.4s ease, padding-top 0.4s ease;
+    opacity: 0;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+}
+
+.belenes-payment-container.active-dropdown {
+    max-height: 250px;
+    opacity: 1;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 229, 255, 0.2);
+}
+
 .transfer-row {
     display: flex;
     align-items: center;

@@ -191,6 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
         estadoPagoInput.value = isPaga ? 'Sin pagar' : 'No paga';
     }
 
+    const checkboxBelenes = document.getElementById('checkbox-belenes');
+    const belenesPaymentSection = document.getElementById('belenes-payment-section');
+
+    if (checkboxBelenes && belenesPaymentSection) {
+        checkboxBelenes.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                belenesPaymentSection.classList.add('active-dropdown');
+            } else {
+                belenesPaymentSection.classList.remove('active-dropdown');
+            }
+        });
+    }
+
     if (isPaga) {
         const paymentSection = document.getElementById('payment-section');
         if (paymentSection) {
