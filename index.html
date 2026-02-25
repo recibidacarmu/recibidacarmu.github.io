@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body style="visibility: hidden;">
     <header class="hero">
         <div class="hero-content">
             <h2 class="pre-title">Llega el día</h2>
@@ -146,7 +146,35 @@
                 <input type="text" id="nombre" name="Nombre" placeholder="Nombre y Apellido" required>
             </div>
 
+            <div id="payment-section" class="payment-box" style="display: none;">
+
+                <p class="payment-text">Para acompañarme en esta noche y confirmar tu lugar, el valor de la
+                    tarjeta es de <strong>$15.000</strong>. Esto incluye cena completa, bebidas y postre.
+                    <br><br><i>Para la fiesta (después de la 1 AM aprox), recomiendo que cada uno traiga lo que vaya a
+                        tomar.</i>
+                    <br><br>Podés ir adelantando el pago transfiriendo a mi cuenta:
+                </p>
+
+                <div class="transfer-details">
+                    <div class="transfer-row">
+                        <span class="transfer-label">Alias:</span>
+                        <span class="transfer-value" id="alias-text">TU.ALIAS.MERCADOPAGO</span>
+                        <button type="button" class="copy-btn" onclick="copyText('alias-text')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="transfer-row">
+                        <span class="transfer-label">CVU:</span>
+                        <span class="transfer-value" id="cvu-text">0000003100000000000000</span>
+                        <button type="button" class="copy-btn" onclick="copyText('cvu-text')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <input type="hidden" id="asistencia" name="Asistencia" value="">
+            <input type="hidden" id="estado-pago" name="EstadoPago" value="">
 
             <div class="form-buttons">
                 <button type="button" class="rsvp-btn btn-yes" onclick="submitForm('Si')">

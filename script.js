@@ -1,17 +1,36 @@
-// Countdown Timer logic
+const validTokens = {
+    'fb3a921d7e8c456a': 'nopaga',
+    'c8f2b19a3d4e675b': 'paga'
+};
+
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('ref');
+
+if (!validTokens[token]) {
+    document.body.innerHTML = `
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; text-align: center; padding: 20px; font-family: 'Share Tech Mono', monospace; background-color: var(--bg-light);">
+            <h1 style="color: var(--primary-color); margin-bottom: 20px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); font-size: 2.5rem;">⚠️ Acceso Denegado</h1>
+            <p style="color: var(--text-dark); max-width: 400px; line-height: 1.6; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">El enlace de invitación está incompleto o es incorrecto.<br><br>Por favor, ingresá usando el link exacto que te envié por WhatsApp para ver la invitación.</p>
+        </div>
+    `;
+    document.body.style.visibility = 'visible';
+    throw new Error("Invalid access token");
+}
+
+document.body.style.visibility = 'visible';
+const isPaga = validTokens[token] === 'paga';
+
 const countdownDate = new Date("Mar 28, 2026 12:00:00").getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = countdownDate - now;
 
-    // Time calculations
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Default to 0 if we passed the date
     if (distance < 0) {
         if (typeof countdownInterval !== 'undefined') clearInterval(countdownInterval);
         document.getElementById("days").innerText = "00";
@@ -26,25 +45,22 @@ function updateCountdown() {
         return;
     }
 
-    // Display
     document.getElementById("days").innerText = days.toString().padStart(2, '0');
     document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
     document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
     document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 }
 
-// Call once to avoid initial 0s delay
 updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
-// Scroll Animations (Reveal elements on scroll)
 function reveal() {
     var reveals = document.querySelectorAll(".reveal");
 
     for (var i = 0; i < reveals.length; i++) {
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 100; // Trigger slightly earlier for better UX
+        var elementVisible = 100;
 
         if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("active");
@@ -53,10 +69,8 @@ function reveal() {
 }
 
 window.addEventListener("scroll", reveal);
-// Trigger once on load
 reveal();
 
-// RSVP Form Logic
 const form = document.getElementById('rsvp-form');
 const asisInput = document.getElementById('asistencia');
 const btnYes = document.querySelector('.btn-yes');
@@ -64,7 +78,6 @@ const btnNo = document.querySelector('.btn-no');
 const formMessage = document.getElementById('form-message');
 const nombreInput = document.getElementById('nombre');
 
-// Prevenir envíos múltiples revisando el localStorage
 if (localStorage.getItem('rsvpSubmitted') === 'true') {
     if (nombreInput) nombreInput.disabled = true;
     if (btnYes) btnYes.disabled = true;
@@ -79,11 +92,10 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbywoMV4VeCdmmQqoAiSt_
 
 function submitForm(asistenciaValue) {
     if (localStorage.getItem('rsvpSubmitted') === 'true') {
-        return; // Evita el envío si ya se completó
+        return;
     }
     if (!form) return;
 
-    // Validar nombre
     const nombreInput = document.getElementById('nombre');
     if (!nombreInput.value.trim()) {
         formMessage.textContent = 'Por favor, escribí tu nombre primero.';
@@ -92,7 +104,6 @@ function submitForm(asistenciaValue) {
         return;
     }
 
-    // Set hidden value and update UI
     asisInput.value = asistenciaValue;
     btnYes.disabled = true;
     btnNo.disabled = true;
@@ -109,16 +120,15 @@ function submitForm(asistenciaValue) {
     fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
         .then(response => {
             if (asistenciaValue === 'Si') {
-                formMessage.textContent = '¡Qué bueno! Nos vemos pronto para festejar.';
+                formMessage.textContent = 'Cool 😎. Nos vemos pronto para festejar.';
             } else {
-                formMessage.textContent = '¡Qué lástima! Nos veremos la próxima.';
+                formMessage.textContent = 'Qué lástima 😔.';
             }
             formMessage.className = 'form-message success';
             btnYes.innerHTML = '<i class="fas fa-check"></i> Enviado';
             btnNo.innerHTML = '<i class="fas fa-check"></i> Enviado';
             form.reset();
 
-            // Guardar en local storage para que no lo envíe de nuevo
             localStorage.setItem('rsvpSubmitted', 'true');
             if (nombreInput) nombreInput.disabled = true;
         })
@@ -133,7 +143,6 @@ function submitForm(asistenciaValue) {
         });
 }
 
-// Typing effect for title
 const titleElement = document.querySelector('.main-title');
 if (titleElement) {
     const textToType = "¡Me recibo\nde Médico!";
@@ -149,20 +158,45 @@ if (titleElement) {
                 textSpan.innerHTML += textToType.charAt(charIndex);
             }
             charIndex++;
-            setTimeout(typeWriter, Math.floor(Math.random() * 80) + 50); // random delay
+            setTimeout(typeWriter, Math.floor(Math.random() * 80) + 50);
         }
     }
 
-    // Start typing slightly after page load
     setTimeout(typeWriter, 600);
 }
 
-// Function to toggle location dropdown
 function toggleLocation(element) {
-    // Optional: close other open dropdowns
     document.querySelectorAll('.clickable-schedule.active-dropdown').forEach(item => {
         if (item !== element) item.classList.remove('active-dropdown');
     });
 
     element.classList.toggle('active-dropdown');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const estadoPagoInput = document.getElementById('estado-pago');
+    if (estadoPagoInput) {
+        estadoPagoInput.value = isPaga ? 'Sin pagar' : 'No paga';
+    }
+
+    if (isPaga) {
+        const paymentSection = document.getElementById('payment-section');
+        if (paymentSection) {
+            paymentSection.style.display = 'block';
+        }
+    }
+});
+
+function copyText(elementId) {
+    const textToCopy = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const btn = document.querySelector(`button[onclick="copyText('${elementId}')"]`);
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+        }, 2000);
+    }).catch(err => {
+        console.error('Error al copiar: ', err);
+    });
 }
