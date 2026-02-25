@@ -269,6 +269,8 @@ h3,
     color: var(--primary-color);
     font-size: 1.2rem;
     transition: transform 0.3s ease;
+    position: relative;
+    animation: arrowPulse 1.5s infinite ease-in-out;
 }
 
 .clickable-schedule {
@@ -278,6 +280,8 @@ h3,
 
 .clickable-schedule.active-dropdown .dropdown-arrow {
     transform: rotate(180deg);
+    animation: none;
+    top: 0;
 }
 
 .timeline-content p {
@@ -509,6 +513,22 @@ footer {
 @keyframes blink {
     50% {
         opacity: 0;
+    }
+}
+
+@keyframes arrowPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        top: 0;
+        text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+    }
+
+    50% {
+        opacity: 0.5;
+        top: 4px;
+        text-shadow: 0 0 15px rgba(0, 229, 255, 0.8);
     }
 }
 
