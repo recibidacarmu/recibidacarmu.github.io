@@ -664,18 +664,30 @@ footer {
     align-items: center;
     justify-content: space-between;
     font-family: 'Share Tech Mono', monospace;
+    width: 100%;
+    gap: 8px;
+    /* Da un poco de espacio si se achica mucho */
 }
 
 .transfer-label {
     color: var(--primary-color);
     font-weight: bold;
     font-size: 0.9rem;
+    flex-shrink: 0;
+    /* Previene que el label se aplaste */
 }
 
 .transfer-value {
     color: white;
     font-size: 1rem;
     letter-spacing: 1px;
+    flex-grow: 1;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    /* Necesario para que el ellipsis funcione adentro del flex */
 }
 
 .copy-btn {
@@ -686,6 +698,8 @@ footer {
     font-size: 1.1rem;
     transition: all 0.2s ease;
     padding: 5px;
+    flex-shrink: 0;
+    /* Previene que el botón se aplaste */
 }
 
 .copy-btn:hover {
