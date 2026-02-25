@@ -151,7 +151,15 @@ function submitForm(asistenciaValue) {
             btnYes.disabled = false;
             btnNo.disabled = false;
             btnYes.innerHTML = '<i class="fas fa-check"></i> ¡Asisto!';
-            btnNo.innerHTML = '<i class="fas fa-times"></i> No podré ir';
+            if (checkboxBelenes && checkboxBelenes.checked) {
+                btnNo.innerHTML = 'Voy solo a la fiesta (2am) 🕺🏻';
+                btnNo.classList.remove('btn-no');
+                btnNo.classList.add('btn-party');
+            } else {
+                btnNo.innerHTML = 'No podré ir 😔';
+                btnNo.classList.remove('btn-party');
+                btnNo.classList.add('btn-no');
+            }
         });
 }
 
@@ -192,32 +200,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const checkboxBelenes = document.getElementById('checkbox-belenes');
-    const belenesPaymentSection = document.getElementById('belenes-payment-section');
+    const belenesDropdown = document.getElementById('belenes-dropdown');
     const whatsappBtn = document.getElementById('whatsapp-btn');
     const nombreInput = document.getElementById('nombre');
 
-    if (checkboxBelenes && belenesPaymentSection) {
+    if (checkboxBelenes) {
         checkboxBelenes.addEventListener('change', (e) => {
             if (e.target.checked) {
-                belenesPaymentSection.classList.add('active-dropdown');
+                if (belenesDropdown) belenesDropdown.style.display = 'block';
+                if (btnNo) {
+                    btnNo.innerHTML = 'Voy solo a la fiesta (2am) 🕺🏻';
+                    btnNo.classList.remove('btn-no');
+                    btnNo.classList.add('btn-party');
+                }
             } else {
-                belenesPaymentSection.classList.remove('active-dropdown');
+                if (belenesDropdown) belenesDropdown.style.display = 'none';
+                if (btnNo) {
+                    btnNo.innerHTML = 'No podré ir 😔';
+                    btnNo.classList.remove('btn-party');
+                    btnNo.classList.add('btn-no');
+                }
             }
         });
     }
 
-    if (whatsappBtn && nombreInput) {
+    if (whatsappBtn) {
         whatsappBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const nombre = nombreInput.value.trim();
-            let mensaje = "Hola! Acá te adjunto el comprobante de la entrada para la fiesta en Los Belenes.";
-            if (nombre) {
-                mensaje += ` Soy ${nombre}, invitado de Agustin Carmu.`;
-            } else {
-                mensaje += " Soy [Escribí tu nombre y apellido acá], invitado de Agustin Carmu.";
-            }
-
-            const whatsappUrl = `https://wa.me/5492284675934?text=${encodeURIComponent(mensaje)}`;
+            let mensaje = "Decime como anotarme en la lista para ir a Los Belenes capo. y cuantos invitados puedo llevar.";
+            const whatsappUrl = `https://wa.me/5492284320801?text=${encodeURIComponent(mensaje)}`;
             window.open(whatsappUrl, '_blank');
         });
     }

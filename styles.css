@@ -463,6 +463,17 @@ h3,
     text-shadow: 0 0 8px rgba(255, 71, 87, 0.8);
 }
 
+.btn-party {
+    border: 1px solid #ff5842 !important;
+    color: #ff6242 !important;
+}
+
+.btn-party:hover {
+    background-color: rgba(255, 177, 66, 0.1) !important;
+    box-shadow: 0 0 15px rgba(255, 177, 66, 0.3) inset, 0 0 15px rgba(255, 177, 66, 0.4) !important;
+    text-shadow: 0 0 8px rgba(255, 177, 66, 0.8) !important;
+}
+
 .rsvp-form .rsvp-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -690,7 +701,7 @@ footer {
 }
 
 .belenes-payment-container.active-dropdown {
-    max-height: 250px;
+    max-height: 400px;
     opacity: 1;
     margin-top: 15px;
     padding-top: 15px;

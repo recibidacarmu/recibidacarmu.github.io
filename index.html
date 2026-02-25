@@ -173,7 +173,8 @@
             <div id="payment-section" class="payment-box" style="display: none;">
 
                 <p class="payment-text">Para acompañarme en esta noche y confirmar tu lugar, el valor de la
-                    tarjeta es de <strong>$15.000</strong>. Esto incluye catering y pernil, bebidas y postre.
+                    tarjeta es de <strong style="color: var(--primary-color);">$15.000</strong>. Esto incluye catering y
+                    pernil, bebidas y postre.
                     <br><br><i>Para la fiesta (después de la 1 AM aprox), recomiendo que cada uno traiga lo que vaya a
                         tomar.</i>
                     <br><br>Hay tiempo <strong>hasta el 15/03</strong> para confirmar.
@@ -208,24 +209,15 @@
                             $10.000)</small></span>
                 </label>
 
-                <div id="belenes-payment-section" class="belenes-payment-container">
-                    <p class="payment-text" style="font-size: 0.9rem; margin-bottom: 10px;">Para confirmar tu lugar en
-                        la lista, transferí el valor de la entrada y adjunta el comprobante en el link de WhatsApp:</p>
-                    <div class="transfer-details"
-                        style="background: rgba(0, 0, 0, 0.4); padding: 12px; border-radius: 6px; border: 1px solid rgba(0, 158, 227, 0.2);">
-                        <div class="transfer-row">
-                            <span class="transfer-label">Alias:</span>
-                            <span class="transfer-value" id="belenes-alias">recibida28</span>
-                            <button type="button" class="copy-btn" onclick="copyText('belenes-alias')">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                        </div>
-                        <div class="transfer-row" style="justify-content: center; margin-top: 10px;">
-                            <a href="#" id="whatsapp-btn" target="_blank" class="rsvp-btn btn-yes"
-                                style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: 1px solid var(--accent-color); color: var(--accent-color); background: transparent; padding: 12px; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-size: 1rem; transition: all 0.3s ease;">
-                                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Enviar Comprobante
-                            </a>
-                        </div>
+                <div id="belenes-dropdown"
+                    style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0, 229, 255, 0.2); text-align: center;">
+                    <p style="color: var(--text-dark); font-size: 0.9rem; margin-bottom: 15px;">Hablame por WhatsApp
+                        para darte las indicaciones y anotarte en la lista:</p>
+                    <div class="transfer-row" style="justify-content: center; margin-top: 10px;">
+                        <a href="#" id="whatsapp-btn" target="_blank" class="rsvp-btn btn-yes"
+                            style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: 1px solid var(--accent-color); color: var(--accent-color); background: transparent; padding: 12px; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-size: 1rem; transition: all 0.3s ease;">
+                            <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Escribime
+                        </a>
                     </div>
                 </div>
             </div>
